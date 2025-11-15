@@ -1984,7 +1984,7 @@ class Premium_Carousel extends Widget_Base {
 				}
 				?>
 				<div class="premium-carousel-nav-arrow-prev">
-					<a type="button" data-role="none" class="<?php echo esc_attr( $vertical_alignment ); ?> carousel-prev" aria-label="Previous" role="button" href="#">
+					<a type="button" data-role="none" class="<?php echo esc_attr( $vertical_alignment ); ?> carousel-prev" aria-label="Previous" role="button">
 						<?php if ( 'yes' !== $settings['custom_left_arrow'] ) { ?>
 							<i class="<?php echo esc_attr( $icon_prev_class ); ?>" aria-hidden="true"></i>
 							<?php
@@ -1995,7 +1995,7 @@ class Premium_Carousel extends Widget_Base {
 					</a>
 					</div>
 					<div class="premium-carousel-nav-arrow-next">
-						<a type="button" data-role="none" class="<?php echo esc_attr( $vertical_alignment ); ?> carousel-next" aria-label="Next" role="button" href="#">
+						<a type="button" data-role="none" class="<?php echo esc_attr( $vertical_alignment ); ?> carousel-next" aria-label="Next" role="button">
 							<?php if ( 'yes' !== $settings['custom_right_arrow'] ) { ?>
 								<i class="<?php echo esc_attr( $icon_next_class ); ?>" aria-hidden="true"></i>
 								<?php

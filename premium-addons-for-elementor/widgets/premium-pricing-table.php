@@ -1172,6 +1172,40 @@ class Premium_Pricing_Table extends Widget_Base {
 			);
 		}
 
+		$this->add_responsive_control(
+			'premium_pricing_table_list_align',
+			array(
+				'label'                => __( 'Alignment', 'premium-addons-for-elementor' ),
+				'type'                 => Controls_Manager::CHOOSE,
+				'separator'            => 'before',
+				'options'              => array(
+					'left'   => array(
+						'title' => __( 'Left', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-text-align-left',
+					),
+					'center' => array(
+						'title' => __( 'Center', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-text-align-center',
+					),
+					'right'  => array(
+						'title' => __( 'Right', 'premium-addons-for-elementor' ),
+						'icon'  => 'eicon-text-align-right',
+					),
+				),
+				'prefix_class'         => 'premium-pricing-features-',
+				'selectors_dictionary' => array(
+					'left'   => 'start',
+					'center' => 'center',
+					'right'  => 'end',
+				),
+				'toggle'               => false,
+				'selectors'            => array(
+					'{{WRAPPER}} .premium-pricing-list .premium-pricing-list-item' => 'justify-content: {{VALUE}}',
+				),
+				'default'              => 'center',
+			)
+		);
+
 		$this->add_control(
 			'featured_order',
 			array(
@@ -1630,7 +1664,7 @@ class Premium_Pricing_Table extends Widget_Base {
 		);
 
 		$this->add_responsive_control(
-			'premium_pricing_table_list_align',
+			'pa_pt_alignment',
 			array(
 				'label'                => __( 'Content Alignment', 'premium-addons-for-elementor' ),
 				'type'                 => Controls_Manager::CHOOSE,
@@ -1649,7 +1683,6 @@ class Premium_Pricing_Table extends Widget_Base {
 						'icon'  => 'eicon-text-align-right',
 					),
 				),
-				'prefix_class'         => 'premium-pricing-features-',
 				'selectors_dictionary' => array(
 					'left'   => 'start',
 					'center' => 'center',
@@ -1657,7 +1690,8 @@ class Premium_Pricing_Table extends Widget_Base {
 				),
 				'toggle'               => false,
 				'selectors'            => array(
-					'{{WRAPPER}} .premium-pricing-list .premium-pricing-list-item, {{WRAPPER}} .premium-pricing-price-container, {{WRAPPER}} .premium-pricing-icon-container' => 'justify-content: {{VALUE}}',
+					'{{WRAPPER}} .premium-pricing-price-container, {{WRAPPER}} .premium-pricing-icon-container' => 'justify-content: {{VALUE}}',
+					'{{WRAPPER}} .premium-pricing-list' => 'justify-self: {{VALUE}}',
 					'{{WRAPPER}} .premium-pricing-table-container' => 'text-align: {{VALUE}}',
 				),
 				'default'              => 'center',
@@ -3425,8 +3459,11 @@ class Premium_Pricing_Table extends Widget_Base {
 
 		$this->add_inline_editing_attributes( 'premium_pricing_table_description_text', 'advanced' );
 		$this->add_render_attribute( 'premium_pricing_table_description_text', 'class', 'premium-pricing-description-container' );
+		$has_title = 'yes' === $settings['premium_pricing_table_title_switcher'];
 
-		$title_tag = Helper_Functions::validate_html_tag( $settings['premium_pricing_table_title_size'] );
+		if ( $has_title ) {
+			$title_tag = Helper_Functions::validate_html_tag( $settings['premium_pricing_table_title_size'] );
+		}
 
 		$link_type = $settings['premium_pricing_table_button_url_type'];
 
@@ -3621,7 +3658,7 @@ class Premium_Pricing_Table extends Widget_Base {
 			<?php
 		endif;
 
-		if ( 'yes' === $settings['premium_pricing_table_title_switcher'] ) :
+		if ( $has_title ) :
 			?>
 			<<?php echo wp_kses_post( $title_tag ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'premium_pricing_table_title_text' ) ); ?>>
 				<?php echo wp_kses_post( $settings['premium_pricing_table_title_text'] ); ?>

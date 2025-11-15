@@ -87,6 +87,7 @@ class Addons_Integration {
 		add_action( 'wp_ajax_check_temp_validity', array( $this, 'check_temp_validity' ) );
 		add_action( 'wp_ajax_update_template_title', array( $this, 'update_template_title' ) );
 		add_action( 'wp_ajax_get_elementor_template_content', array( $this, 'get_template_content' ) );
+		add_action( 'wp_ajax_nopriv_get_elementor_template_content', array( $this, 'get_template_content' ) );
 
 		add_action( 'wp_ajax_pa_get_editor_template', array( $this, 'pa_get_editor_template' ) );
 
